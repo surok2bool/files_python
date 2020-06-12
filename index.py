@@ -1,6 +1,6 @@
 import os
 import commands_executor as ce
-import motion
+
 
 currentDir = os.getcwd()
 print('Текущий каталог:  {dir}'.format(dir=currentDir))

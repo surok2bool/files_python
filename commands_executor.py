@@ -1,3 +1,7 @@
+import file_checker
+import os
+
+
 """
 
 Список всех команд с описанием. Необходимо для вывода информации о командах и проверке на корректность
@@ -17,6 +21,14 @@ commandsDescription = dict(
 )
 
 """
+Вывод текущего каталога, необходимо для функций перемещения по каталогам
+"""
+def showCurrentPath():
+    currentDir = os.getcwd()
+    print('Текущий каталог:  {dir}'.format(dir=currentDir))
+
+
+"""
 
 Выводит в консоль все команды + описание к ним
 
@@ -28,7 +40,30 @@ def showAllCommands():
 
 
 def goUp():
-    print('go up')
+    showCurrentPath()
+
+
+def goBack():
+    print('go back')
+
+def goTo():
+    print('go to ...')
+
+def showFiles():
+    print('files')
+
+def showDirs():
+    print('dirs')
+
+def showAll():
+    print('start show all')
+    file_checker.showAll()
+
+def stopProgramm():
+    print('stop')
+
+def details():
+    print('details')
 
 """
 
@@ -50,11 +85,22 @@ def checkCommand(command):
 functions = {
     'help': showAllCommands,
     'up': goUp,
+    'back': goBack,
+    'go': goTo,
+    'show_files': showFiles,
+    'show_dirs': showDirs,
+    'show_all': showAll,
+    'details': details,
+    'exit': stopProgramm
 }
 
 
 
-def commandExecutor(command):
+def commandExecutor(command, history):
+    # Устанавливаем максимальную длину истории и удаляем первый элемент при необходимости, дабы не переполнять буфер
+    if len(history) == 20:
+        history.pop(0)
+    history.append(command)
     functionName = checkCommand(command)
     if functionName is not None:
         functions[functionName]()

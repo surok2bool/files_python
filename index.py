@@ -5,14 +5,15 @@ import commands_executor as ce
 currentDir = os.getcwd()
 print('Текущий каталог:  {dir}'.format(dir=currentDir))
 
-print(ce.commandExecutor('help'))
+history = []
+print(ce.commandExecutor('help', history))
 
 isRunning = True
 
 
 def app():
     command = input('Введите команду: ')
-    ce.commandExecutor(command)
+    ce.commandExecutor(command, history)
     if command == 'exit':
         needContinue = False
     else:

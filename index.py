@@ -9,14 +9,8 @@ print(ce.commandExecutor('help'))
 
 isRunning = True
 
-null = None
-if null == None:
-    print('none')
-else:
-    print('yes')
 
-
-def app(isRunning):
+def app():
     command = input('Введите команду: ')
     ce.commandExecutor(command)
     if command == 'exit':
@@ -27,7 +21,7 @@ def app(isRunning):
 
 
 while isRunning:
-    isRunning = app(isRunning)
+    isRunning = app()
 
 
 

@@ -1,20 +1,34 @@
-def writeHistoryCommand(command):
+def getHistoryCommand():
+    return '/home/surok/python_projects/files_python/data/commands'
+
+def getHistoryPaths():
+    return '/home/surok/python_projects/files_python/data/paths'
+
+def writeHistory(data, typeOfHistory):
     # Наверное надо при инициализации скрипта программными средствами определять путь к корню приложения
     # и устанавливать какую-то константу, по которой будем дальше отслеживать файлы для записи
-    filePath = '/home/surok/python_projects/files_python/data/commands'
 
-    commandHistory = open(filePath, 'r+')
+    historyTypes = {
+        'command': getHistoryCommand,
+        'paths': getHistoryPaths,
+    }
+
+    filePath = historyTypes.get(typeOfHistory)()
+
+    print(filePath)
+
+    fileHistory = open(filePath, 'r+')
 
     # Смещаем указатель файла в конец, ибо открытие файла по r+ автоматом ставит указатель в начало
     # и write(), соответственно, пишет в начало
-    commandHistory.seek(0, 2)
-    commandHistory.writelines([command, '\n'])
+    fileHistory.seek(0, 2)
+    fileHistory.writelines([data, '\n'])
 
     # Снова смещаем указатель файла, уже в начало, чтобы прочесть содержимое
-    commandHistory.seek(0, 0)
-    history = commandHistory.readlines()
+    fileHistory.seek(0, 0)
+    history = fileHistory.readlines()
 
-    commandHistory.close()
+    fileHistory.close()
 
     controlHistoryLen(filePath, history)
 
@@ -29,7 +43,8 @@ def controlHistoryLen(historyFilePath, history):
 
 def cleanHistory():
     paths = [
-        '/home/surok/python_projects/files_python/data/commands',
+        getHistoryCommand(),
+        getHistoryPaths()
     ]
 
     for path in paths:

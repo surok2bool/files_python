@@ -25,6 +25,7 @@ commandsDescription = dict(
 """
 def showCurrentPath():
     currentDir = os.getcwd()
+    history_helper.writeHistory(currentDir, 'paths')
     print('Текущий каталог:  {dir}'.format(dir=currentDir))
 
 
@@ -98,7 +99,7 @@ functions = {
 
 
 def commandExecutor(command):
-    history_helper.writeHistoryCommand(command)
+    history_helper.writeHistory(command, 'command')
 
     functionName = checkCommand(command)
     if functionName is not None:

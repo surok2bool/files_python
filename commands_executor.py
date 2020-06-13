@@ -1,6 +1,6 @@
-import file_checker
+import file_helper
 import os
-
+import history_helper
 
 """
 
@@ -40,6 +40,7 @@ def showAllCommands():
 
 
 def goUp():
+    os.chdir('../')
     showCurrentPath()
 
 
@@ -57,10 +58,10 @@ def showDirs():
 
 def showAll():
     print('start show all')
-    file_checker.showAll()
+    file_helper.showAll()
 
 def stopProgramm():
-    print('stop')
+    history_helper.cleanHistory()
 
 def details():
     print('details')
@@ -96,11 +97,9 @@ functions = {
 
 
 
-def commandExecutor(command, history):
-    # Устанавливаем максимальную длину истории и удаляем первый элемент при необходимости, дабы не переполнять буфер
-    if len(history) == 20:
-        history.pop(0)
-    history.append(command)
+def commandExecutor(command):
+    history_helper.writeHistoryCommand(command)
+
     functionName = checkCommand(command)
     if functionName is not None:
         functions[functionName]()

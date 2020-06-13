@@ -3,9 +3,9 @@ import commands_executor as ce
 
 
 currentDir = os.getcwd()
-print('Текущий каталог:  {dir}'.format(dir=currentDir))
 
-print(ce.commandExecutor('help'))
+ce.showCurrentPath()
+ce.commandExecutor('help')
 
 isRunning = True
 

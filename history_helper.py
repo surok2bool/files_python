@@ -15,8 +15,6 @@ def writeHistory(data, typeOfHistory):
 
     filePath = historyTypes.get(typeOfHistory)()
 
-    print(filePath)
-
     fileHistory = open(filePath, 'r+')
 
     # Смещаем указатель файла в конец, ибо открытие файла по r+ автоматом ставит указатель в начало
@@ -49,3 +47,8 @@ def cleanHistory():
 
     for path in paths:
         open(path, 'w').close()
+
+def getPrevPath():
+    data = open(getHistoryPaths(), 'r').readlines()
+    data.reverse()
+    return data[1][0:-1]

@@ -46,7 +46,10 @@ def goUp():
 
 
 def goBack():
-    print('go back')
+    path = history_helper.getPrevPath()
+    os.chdir(path)
+    showCurrentPath()
+
 
 def goTo():
     print('go to ...')

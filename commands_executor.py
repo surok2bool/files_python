@@ -55,6 +55,7 @@ def goTo():
     print('go to ...')
 
 def showFiles():
+
     print('files')
 
 def showDirs():
@@ -67,8 +68,28 @@ def showAll():
 def stopProgramm():
     history_helper.cleanHistory()
 
+
+def repeat_command(command):
+    need_repeat = input('Повторить команду? (y/n) ')
+
+    if need_repeat == 'y':
+        return True
+    elif need_repeat == 'n':
+        return False
+    else:
+        print('Пожалуйста, введите y или n')
+        repeat_command(command)
+
+
 def details():
-    print('details')
+    need_repeat = True
+    while need_repeat:
+        name = input('Введите название объекта для детальной информации о нем: ')
+        if not os.path.exists(name):
+            print('Такого файла/папки не существует!')
+        else:
+            file_helper.getDetails(name)
+        need_repeat = repeat_command('details')
 
 """
 
